@@ -4,7 +4,7 @@ id| username | email | password digest|
 
 books
 
-id| title | volume | author_id 
+id| title | volume | author_id
 
 genres
 
@@ -29,7 +29,7 @@ Login Params:
 user => {username => Harry, email=>harry@hogwarts.edu, password=>hedwig}
 
 New Manga Params:
-manga => {title => Fruits Basket, volume=>1, author=>Natsuki Takaya, Genre: Shoujo}
+manga => {title => Fruits Basket, volume=>1, author=>Natsuki Takaya, Genre: Shoujo, genre_ids => [#, #]}
 
 get '/users/:id'
   #THINGS TO BE DONE:
