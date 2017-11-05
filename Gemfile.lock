@@ -52,6 +52,8 @@ GEM
       pry (>= 0.9.10, < 0.11.0)
     public_suffix (3.0.0)
     rack (2.0.3)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (2.0.0)
       rack
     rack-test (0.6.3)
@@ -117,6 +119,7 @@ DEPENDENCIES
   database_cleaner!
   pry
   pry-nav
+  rack-flash3
   rack-test
   rake
   require_all
