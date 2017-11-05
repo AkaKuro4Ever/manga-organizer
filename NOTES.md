@@ -12,8 +12,12 @@ user_id | book_id
 
 Sign Up Params:
 user => {username => Harry, email=>harry@hogwarts.edu, password=>hedwig}
+
 Login Params:
 user => {username => Harry, email=>harry@hogwarts.edu, password=>hedwig}
+
+New Manga Params:
+manga => {title => Fruits Basket, volume=>1, author=>Natsuki Takaya, Genre: Shoujo}
 
 get '/users/:id'
   #THINGS TO BE DONE:

@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104221323) do
+ActiveRecord::Schema.define(version: 20171105212745) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "author"
     t.string "genre"
+    t.integer "volume"
   end
 
   create_table "user_books", force: :cascade do |t|
