@@ -24,10 +24,7 @@ use Rack::Flash
 #In signup - make sure that people with the same email cannot sign up.
 
   get '/users/:id' do
-    #THINGS TO BE DONE:
-    #[X] profile pg can only be seen when logged in
-    #[X] profile pg can only be seen if person logged in is the user of that profile page
-    #[X]create a functioning logout button
+
     @user = User.find_by(id: params[:id])
     if logged_in? && current_user == @user
       erb :profile_page
@@ -41,6 +38,17 @@ use Rack::Flash
   get '/login' do
 
     erb :login
+  end
+
+  post '/login' do
+    @user = User.find_by(email: params[:user][:email])
+    if @user && @user.authenticate(params[:user][:password])
+        session[:id] = @user.id
+        redirect "/users/#{@user.id}"
+    else
+      #use Flash Here!
+      redirect "/login"
+    end
   end
 
   get '/logout' do
