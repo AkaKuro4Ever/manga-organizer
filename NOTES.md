@@ -4,11 +4,19 @@ id| username | email | password digest|
 
 books
 
-id| title | volume | author_id | genre
+id| title | volume | author_id 
+
+genres
+
+id | name
 
 user_books
 
 user_id | book_id
+
+book_genres
+
+book_id | genre_id
 
 authors
 
