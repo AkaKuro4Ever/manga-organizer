@@ -4,11 +4,15 @@ id| username | email | password digest|
 
 books
 
-id| title | author | genre
+id| title | volume | author_id | genre
 
 user_books
 
 user_id | book_id
+
+authors
+
+id | name
 
 Sign Up Params:
 user => {username => Harry, email=>harry@hogwarts.edu, password=>hedwig}
