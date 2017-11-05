@@ -25,9 +25,9 @@ use Rack::Flash
 
   get '/users/:id' do
     #THINGS TO BE DONE:
-    #profile pg can only be seen when logged in
-    #profile pg can only be seen if person logged in is the user of that profile page
-    #create a functioning logout button
+    #[X] profile pg can only be seen when logged in
+    #[X] profile pg can only be seen if person logged in is the user of that profile page
+    #[X]create a functioning logout button
     @user = User.find_by(id: params[:id])
     if logged_in? && current_user == @user
       erb :profile_page
@@ -40,5 +40,11 @@ use Rack::Flash
 #LOG IN FORM ----------------
   get '/login' do
 
+    erb :login
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
   end
 end
