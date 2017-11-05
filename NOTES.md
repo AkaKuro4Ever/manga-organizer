@@ -11,4 +11,4 @@ user_books
 user_id | book_id
 
 Sign Up Params:
-user => {username => Harry, email=>harry@hogwarts.com, password=>hedwig}
+user => {username => Harry, email=>harry@hogwarts.edu, password=>hedwig}
