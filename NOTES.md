@@ -1,11 +1,12 @@
 #THINGS HAVEN'T DONE - and won't do: make sure there isn't an instance of that same book
+#In signup - make sure that people with the same email cannot sign up. (We're not doing this one for Sinatra project)
+#Have some kind of message for wrong logins and sign
 
 #THINGS STILL TO DO -
 #Must still make edits in order to put books into an actual user's account!
-#Must make author pages
-#Must make genre pages
 #Show books in account
-#must be able to edit a specific book page and a specific account page
+#Should we be able to edit genre and author pages?
+#must be able to edit a specific book page
 #Must put a link to each page on every list
 #make sure that if volume is already existing, it links to that book's homepage
 #make a book homepage that you can edit

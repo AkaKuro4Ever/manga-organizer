@@ -2,12 +2,12 @@ class BookController < ApplicationController
 
   get '/manga/new' do
 
-    erb :new
+    erb :'/book/new'
   end
 
   get '/manga' do
 
-    erb :manga
+    erb :'/book/manga'
   end
 
   post '/manga' do
@@ -52,20 +52,20 @@ class BookController < ApplicationController
       current_user.books << @book
     end
     @user = current_user
-    erb :book
+    erb :'/book/book'
   end
 
   get '/manga/:id' do
 
     @book = Book.find_by(id: params[:id])
-    erb :book
+    erb :'/book/book'
   end
 
   get '/authors/:id' do
 
     @author = Author.find_by(id: params[:id])
 
-    erb :author
+    erb :'/book/author'
   end
 
   get '/genres/:id' do
@@ -75,25 +75,14 @@ class BookController < ApplicationController
     erb :genre
   end
 
-  get '/users/:id/edit' do
-
-    erb :edit
-  end
-
-  patch '/users/:id/edit' do
-    @user = User.find_by[id: params[:id]]
-    #Make sure to check that someone else cannot edit this!
-    params[:manga][:books].each do |book|
-      @user.books.delete(book)
-    end
-
-	  redirect to "/users/#{@user.id}"
-  	end
-  end
-
   get '/manga/add/:id' do
     @book = Book.find_by(id: params[:id])
     current_user.books << @book
     redirect to "users/#{current_user.id}"
+  end
+
+  get '/manga/edit' do
+
+    erb :'book/edit'
   end
 end

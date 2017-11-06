@@ -6,7 +6,7 @@ use Rack::Flash
 #SIGN UP FORM ----------------
   get '/signup' do
 
-    erb :signup
+    erb :'user/signup'
   end
 
   post '/signup' do
@@ -20,24 +20,20 @@ use Rack::Flash
     end
   end
 
-#THINGS TO BE DONE:
-#In signup - make sure that people with the same email cannot sign up. (We're not doing this one for Sinatra project)
-#Have some kind of message for wrong logins and sign
-
   get '/users/:id' do
     @user = User.find_by(id: params[:id])
     if logged_in? && current_user == @user
-      erb :profile_page
+      erb :'user/profile_page'
       #Technically, called erb :show
     else
-      erb :show_outsiders
+      erb :'user/show_outsiders'
     end
   end
 
 #LOG IN FORM ----------------
   get '/login' do
 
-    erb :login
+    erb :'user/login'
   end
 
   post '/login' do
@@ -50,6 +46,22 @@ use Rack::Flash
     end
   end
 
+  #EDITING USER ACCOUNT'S BOOK COLLECTION --
+  get '/users/:id/edit' do
+
+    erb :'user/edit'
+  end
+
+  patch '/users/:id/edit' do
+    @user = User.find_by[id: params[:id]]
+    #Make sure to check that someone else cannot edit this!
+    params[:manga][:books].each {|book|
+      @user.books.delete(book)}
+
+    redirect to "/users/#{@user.id}"
+  end
+
+  #LOGOUT ----------
   get '/logout' do
     session.clear
     redirect '/'
