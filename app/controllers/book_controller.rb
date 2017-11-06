@@ -80,6 +80,17 @@ class BookController < ApplicationController
     erb :edit
   end
 
+  patch '/users/:id/edit' do
+    @user = User.find_by[id: params[:id]]
+    #Make sure to check that someone else cannot edit this!
+    params[:manga][:books].each do |book|
+      @user.books.delete(book)
+    end
+
+	  redirect to "/users/#{@user.id}"
+  	end
+  end
+
   get '/manga/add/:id' do
     @book = Book.find_by(id: params[:id])
     current_user.books << @book
