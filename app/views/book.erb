@@ -18,5 +18,14 @@
     <p><%@book.genres.all.each_with_index do |genre, i|%></p>
     <p><%=i+1%>. <%=genre.name%></p>
     <%end%>
+
+    <%if logged_in? && user.books.include?(@book)%>
+      <p>This book is in your collection.</p>
+    <%elsif logged_in?%>
+      <p>This book is not in your collection.</p>
+      <a href="/manga/add/<%=@book.id%>">Add To My Collection</a>
+    <%else%>
+      <%nil%>
+    <%end%>
   </body>
 </html>

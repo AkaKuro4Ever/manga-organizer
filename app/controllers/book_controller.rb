@@ -46,7 +46,12 @@ class BookController < ApplicationController
         end
       end
     end
-    @book.save
+
+  @book.save
+    if logged_in?
+      current_user.books << @book
+    end
+    @user = current_user
     erb :book
   end
 
@@ -68,5 +73,16 @@ class BookController < ApplicationController
     @genre = Genre.find_by(id: params[:id])
 
     erb :genre
+  end
+
+  get '/users/:id/edit' do
+
+    erb :edit
+  end
+
+  get '/manga/add/:id' do
+    @book = Book.find_by(id: params[:id])
+    current_user.books << @book
+    redirect to "users/#{current_user.id}"
   end
 end
