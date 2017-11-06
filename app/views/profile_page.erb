@@ -7,6 +7,10 @@
     <h1></h1>
     <h3>Hello, <%=@user.username%></h3>
 
+    <h3> Your Manga </h3>
+    <%@user.books.all.each_with_index do |book, i|%></p>
+      <p><%=i+1%>. <%=genre.name%></p>
+    <%end%>
     <a href="/logout">Logout</a>
   </body>
 </html>
