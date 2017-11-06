@@ -9,15 +9,18 @@
     <h3><%=i+1%>. <%=book.title%></h3>
     <%if book.volume != nil%>
     <h3>Volume: <%= book.volume%></h3>
+    <a href="/manga/<%=book.id%>">More Information</a>
     <%end%>
 
     <%if book.author != nil%>
     <h3>Author: </h3><p><%= book.author.name%></p>
+    <a href="/authors/<%=book.author.id%>">More Information</a>
     <%end%>
 
     <%if book.genres != nil%>
       <h3>Genre: </h3> <%book.genres.all.each_with_index do |genre, i|%></p>
         <p><%=i+1%>. <%=genre.name%></p>
+        <a href="/genres/<%=book.genre.id%>">All <%=genre.name%> Books</a>
       <%end%>
     <%end%>
   <%end%>

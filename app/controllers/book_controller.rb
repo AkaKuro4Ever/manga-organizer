@@ -49,4 +49,24 @@ class BookController < ApplicationController
     @book.save
     erb :book
   end
+
+  get '/manga/:id' do
+
+    @book = Book.find_by(id: params[:id])
+    erb :book
+  end
+
+  get '/authors/:id' do
+
+    @author = Author.find_by(id: params[:id])
+
+    erb :author
+  end
+
+  get '/genres/:id' do
+
+    @genre = Genre.find_by(id: params[:id])
+
+    erb :genre
+  end
 end

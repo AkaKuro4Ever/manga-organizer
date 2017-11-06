@@ -4,6 +4,8 @@
 #Must still make edits in order to put books into an actual user's account!
 #Must make author pages
 #Must make genre pages
+#Show books in account
+#must be able to edit a specific book page and a specific account page
 #Must put a link to each page on every list
 #make sure that if volume is already existing, it links to that book's homepage
 #make a book homepage that you can edit
