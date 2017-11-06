@@ -1,3 +1,5 @@
+#THINGS HAVEN'T DONE - and won't do: make sure there isn't an instance of that same book
+
 users
 
 id| username | email | password digest|

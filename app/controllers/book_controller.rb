@@ -12,13 +12,16 @@ class BookController < ApplicationController
     #must be able to add and delete books on that same edit page (Look back at that figure/landmark assignment)
     #make sure that if someone types in an author, they check to see if the author is already there, and if so, they use that author
     #[X] make sure that if someone clicks an author and types one in, it reloads the form
-    author = params[:manga][:author].split.map(&:capitalize).join(' ')
+    author = params[:manga][:author].strip.split.map(&:capitalize).join(' ')
+    genre = params[:manga][:genre].strip.split.map(&:capitalize).join(' ')
 
     if params[:manga][:title] != ""
       @book = Book.new(title: params[:manga][:title].split.map(&:capitalize).join(' '), volume: params[:manga][:volume])
     end
-    #If both are filled out, it redirects
-    if author != "" && params[:manga][:author_id] != nil
+    #If both are authors filled, redirects
+    #If title is not filled out, redirects
+    #If both genres filled out, redirects
+    if author != "" && params[:manga][:author_id] != nil || genre != "" && params[:manga][:genre_ids] != nil || params[:manga][:title] == ""
       redirect '/manga/new'
     #If top is filled out, but author exists, it assigns existing author
     elsif author != "" && Author.check(author)
@@ -30,24 +33,23 @@ class BookController < ApplicationController
     else
       @book.author = Author.find_by(id: params[:manga][:author_id])
     end
-
-
-    genre = params[:manga][:genre].split.map(&:capitalize).join(' ')
-    #If both are filled out, it redirects
-    if genre != "" && params[:manga][:genre_ids] != nil
-      redirect '/manga/new'
+    # binding.pry
     #If top is filled out, but genre exists, it assigns existing genre
-  elsif genre != "" && Genre.check(genre)
+    if genre != "" && Genre.check(genre)
       @book.genres << Genre.find_by(name: genre)
     #If top is filled out and genre doesn't exist, it assigns top
-  elsif genre != ""
+    elsif genre != ""
       @book.genres << Genre.create(name: genre)
     #If top isn't filled out, it assigns bottom
     else
-      @book.genres << Genre.find_by(id: params[:manga][:genre_ids][])
+      if params[:manga][:genre_ids] != nil
+        params[:manga][:genre_ids].each do |id|
+          @book.genres << Genre.find_by(id: id)
+        end
+      end
     end
     @book.save
-
+    binding.pry
     erb :book
   end
 end

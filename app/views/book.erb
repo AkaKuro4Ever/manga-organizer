@@ -6,7 +6,7 @@
 </head>
   <body>
     <h1><%=@book.title%></h1>
-    <%if @book.volume != ""%>
+    <%if @book.volume != nil%>
     <h2>Volume: <%= @book.volume%></h2>
     <%end%>
 
@@ -17,7 +17,6 @@
 
     <p><%@book.genres.all.each_with_index do |genre, i|%></p>
     <p><%=i+1%>. <%=genre.name%></p>
-    <br></br>
     <%end%>
   </body>
 </html>
