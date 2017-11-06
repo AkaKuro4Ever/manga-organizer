@@ -4,12 +4,15 @@
   <title>Your Manga</title>
 </head>
   <body>
-    <h1></h1>
-    <h3>Hello, <%=@user.username%></h3>
+    <h1>Hello, <%=@user.username%></h1>
 
-    <h3> Your Manga </h3>
-    <%@user.books.all.each_with_index do |book, i|%></p>
-      <p><%=i+1%>. <%=genre.name%></p>
+    <h2> Your Manga </h2>
+    <%@user.books.all.each_with_index do |book, i|%>
+      <h1><%=i+1%>. <%=book.title%></h1>
+      <%if book.volume != nil%>
+      <p>Volume: <%= book.volume%></p>
+      <a href="/manga/<%=book.id%>">More Information</a>
+      <%end%>
     <%end%>
     <a href="/logout">Logout</a>
   </body>
