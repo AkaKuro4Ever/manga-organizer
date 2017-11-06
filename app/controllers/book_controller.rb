@@ -5,14 +5,12 @@ class BookController < ApplicationController
     erb :new
   end
 
-  post '/manga' do
-    #make sure that if volume is already existing, it links to that book's homepage
+  get '/manga' do
 
-    #make a book homepage that you can edit
-    #later must make a user page you can edit with the books in your collection
-    #must be able to add and delete books on that same edit page (Look back at that figure/landmark assignment)
-    #make sure that if someone types in an author, they check to see if the author is already there, and if so, they use that author
-    #[X] make sure that if someone clicks an author and types one in, it reloads the form
+    erb :manga
+  end
+
+  post '/manga' do
     author = params[:manga][:author].strip.split.map(&:capitalize).join(' ')
     genre = params[:manga][:genre].strip.split.map(&:capitalize).join(' ')
 
@@ -34,7 +32,6 @@ class BookController < ApplicationController
     else
       @book.author = Author.find_by(id: params[:manga][:author_id])
     end
-    # binding.pry
     #If top is filled out, but genre exists, it assigns existing genre
     if genre != "" && Genre.check(genre)
       @book.genres << Genre.find_by(name: genre)
@@ -50,7 +47,6 @@ class BookController < ApplicationController
       end
     end
     @book.save
-    binding.pry
     erb :book
   end
 end
