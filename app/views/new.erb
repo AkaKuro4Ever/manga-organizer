@@ -16,7 +16,7 @@
       <p> Or pick an author below: </p>
       <br></br>
       <%Author.all.each do |author|%>
-        <input type="checkbox" name="manga[author_ids][] value="<%=author.id%>"><%=author.name%></input>
+        <input type="radio" name="manga[author_id] value="<%=author.id%>"><%=author.name%></input>
       <%end%>
       <br></br>
 

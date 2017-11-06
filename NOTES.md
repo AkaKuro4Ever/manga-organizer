@@ -29,7 +29,7 @@ Login Params:
 user => {username => Harry, email=>harry@hogwarts.edu, password=>hedwig}
 
 New Manga Params:
-manga => {title => Fruits Basket, volume=>1, author=>Natsuki Takaya, Genre: Shoujo, genre_ids => [#, #]}
+manga => {title => Fruits Basket, volume=>1, author=>Natsuki Takaya, author_id: 2, Genre: Shoujo, genre_ids => [#, #]}
 
 get '/users/:id'
   #THINGS TO BE DONE:
