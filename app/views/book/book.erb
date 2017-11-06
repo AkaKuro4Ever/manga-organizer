@@ -15,10 +15,11 @@
     <br></br>
     <h3> Genre: </h3>
 
-    <p><%@book.genres.all.each_with_index do |genre, i|%></p>
-    <p><%=i+1%>. <%=genre.name%></p>
+    <p>Other Genres: </p>
+    <%Genre.all.each do |genre|%>
+      <input type="checkbox" name="manga[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
     <%end%>
-
+    <!-- FIND WAY TO PRE-CHECK BOXES -->
     <%if logged_in? && user.books.include?(@book)%>
       <p>This book is in your collection.</p>
     <%elsif logged_in?%>

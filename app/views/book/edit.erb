@@ -6,14 +6,20 @@
 </head>
   <body>
     <form method="post" action="/manga/edit/<%=@book.id%>">
-    <h1><%=@book.title%></h1>
-    <%if @book.volume != nil%>
-    <h2>Volume: <%= @book.volume%></h2>
+    <label>Title: </label><input type = "text" placeholder= "%=@book.title%>" name="manga[title]">
+    <br></br>
+    <label>Volume: </label><input type = "text" placeholder= "%=@book.volume%>" name="manga[volume]">
+    <br></br>
+    <label>Author: </label><input type = "text" placeholder= "%=@book.author%>" name="manga[author]">
+    <br></br>
+    <p> Or pick an author below: </p>
+    <br></br>
+    <%Author.all.each do |author|%>
+      <input type="radio" name="manga[author_id]" value="<%=author.id%>"><%=author.name%></input>
     <%end%>
+    <br></br>
+    <label>Genre: </label><input type = "text" name="manga[genre]">
 
-    <br></br>
-    <h3>Author: </h3> <h4><%=@book.author.name%></h4>
-    <br></br>
     <h3> Genre: </h3>
 
     <p><%@book.genres.all.each_with_index do |genre, i|%></p>

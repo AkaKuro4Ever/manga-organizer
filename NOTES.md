@@ -50,6 +50,10 @@ Edit Manga in Profile Page Params:
 
 manga => {books => [HP 1, HP 2, HP 3]}
 
+Edit Manga in Details page Params:
+
+manga => {title => Fruits Basket, volume=>1, author=>Natsuki Takaya, author_id: 2, genre: Shoujo, genre_ids => [#, #]}
+
 get '/users/:id'
   #THINGS TO BE DONE:
   #[X] profile pg can only be seen when logged in
