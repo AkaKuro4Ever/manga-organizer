@@ -20,6 +20,7 @@ use Rack::Flash
     end
   end
 
+  #SEE USER PROFILE PAGE -----------
   get '/users/:id' do
     @user = User.find_by(id: params[:id])
     if logged_in? && current_user == @user
@@ -49,11 +50,12 @@ use Rack::Flash
   #EDITING USER ACCOUNT'S BOOK COLLECTION --
   get '/users/:id/edit' do
 
+    @user = User.find_by(id: params[:id])
     erb :'user/edit'
   end
 
   patch '/users/:id/edit' do
-    @user = User.find_by[id: params[:id]]
+    @user = User.find_by(id: params[:id])
     #Make sure to check that someone else cannot edit this!
     params[:manga][:books].each {|book|
       @user.books.delete(book)}

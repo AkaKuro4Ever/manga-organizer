@@ -11,9 +11,10 @@
       <h1><%=i+1%>. <%=book.title%></h1>
       <%if book.volume != nil%>
       <p>Volume: <%= book.volume%></p>
-      <a href="/manga/<%=book.id%>">More Information</a>
+      <a href="/manga/<%=book.id%>">Book Details</a>
       <%end%>
     <%end%>
+    <br></br>
     <a href="/users/<%=@user.id%>/edit">Edit</a>
     <a href="/logout">Logout</a>
   </body>

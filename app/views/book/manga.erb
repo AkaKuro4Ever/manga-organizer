@@ -5,22 +5,22 @@
 
 </head>
   <body>
+    <h1>All Manga In Collection</h1>
     <%Book.all.each_with_index do |book, i|%>
     <h3><%=i+1%>. <%=book.title%></h3>
     <%if book.volume != nil%>
     <h3>Volume: <%= book.volume%></h3>
-    <a href="/manga/<%=book.id%>">More Information</a>
     <%end%>
-
+    <a href="/manga/<%=book.id%>">Book Details</a>
     <%if book.author != nil%>
     <h3>Author: </h3><p><%= book.author.name%></p>
     <a href="/authors/<%=book.author.id%>">More Information</a>
     <%end%>
 
-    <%if book.genres != nil%>
+    <%if book.genres != []%>
       <h3>Genre: </h3> <%book.genres.all.each_with_index do |genre, i|%></p>
         <p><%=i+1%>. <%=genre.name%></p>
-        <a href="/genres/<%=book.genre.id%>">All <%=genre.name%> Books</a>
+        <a href="/genres/<%=genre.id%>">All <%=genre.name%> Books</a>
       <%end%>
     <%end%>
   <%end%>

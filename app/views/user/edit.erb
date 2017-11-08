@@ -8,17 +8,17 @@
 
     <h2> Your Manga </h2>
     <h3>Check all books you'd like to delete from your collection.</h3>
-    <form method="POST" action="/users/<%=@user.id/edit">
+    <form method="POST" action="/users/<%=@user.id%>/edit">
     <input id="hidden" type="hidden" name="_method" value="patch">
 
     <%@user.books.all.each do |book|%>
-    <input type="checkbox" name="manga[books][]" value="<%=book.id%>"><%=book.title%></input>
+    <input type="checkbox" name="manga[books][]" value="<%=book.id%>"> <%=book.title%></input>
       <%if book.volume != nil%>
-      <p>Volume: <%= book.volume%></p>
+      <p>Volume: <%=book.volume%></p>
       <%end%>
 
       <%if book.author != nil%>
-      <p>Author: <%= book.author%></p>
+      <p>Author: <%=book.author.name%></p>
       <%end%>
     <%end%>
 

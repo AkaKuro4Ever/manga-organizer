@@ -10,18 +10,18 @@
     <h2>Volume: <%= @book.volume%></h2>
     <%end%>
 
-    <br></br>
     <h3>Author: </h3> <h4><%=@book.author.name%></h4>
-    <br></br>
-    <h3> Genre: </h3>
-
-    <p>Other Genres: </p>
-    <%Genre.all.each do |genre|%>
-      <input type="checkbox" name="manga[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
+    <h3> Genre: </h3> <h4><%@book.genres.each_with_index do |genre, i|%>
+    <p><%=i+1%>. <%=genre.name%></p>
     <%end%>
-    <!-- FIND WAY TO PRE-CHECK BOXES -->
-    <%if logged_in? && user.books.include?(@book)%>
+    <%if @book.genres == []%>
+    <p>N/A</p>
+    <%end%>
+  </h4>
+
+    <%if logged_in? && @user.books.include?(@book)%>
       <p>This book is in your collection.</p>
+      <a href="/manga/remove/<%=@book.id%>">Remove From My Collection</a>
     <%elsif logged_in?%>
       <p>This book is not in your collection.</p>
       <a href="/manga/add/<%=@book.id%>">Add To My Collection</a>

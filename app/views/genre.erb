@@ -7,12 +7,17 @@
   <body>
     <h1><%=@genre.name%></h1>
     <h3> Works </h3>
-    <%@genre.books.all.each_with_index do |book, i|%>
+    <%@genre.books.all.uniq.each_with_index do |book, i|%>
     <p><%=i+1%>. <%=book.title%></p>
-
-    <h3> Authors </h3>
-    <%@genre.authors.all.each_with_index do |genre, i|%>
+      <%if book.volume !=nil%>
+      <p>Volume: <%=book.volume%></p>
+      <%end%>
+    <a href="/manga/<%=book.id%>">Book Details</a>
+    <%end%>
+    <h3> Author(s) </h3>
+    <%@genre.authors.all.uniq.each_with_index do |author, i|%>
     <p><%=i+1%>. <%=author.name%></p>
+    <a href="/authors/<%=author.id%>">Author Details</a>
     <%end%>
   </body>
 </html>
