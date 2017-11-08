@@ -12,11 +12,15 @@
 
     <h3>Author: </h3> <h4><%=@book.author.name%></h4>
     <a href="/authors/<%=@book.author.id%>">Author Details</a>
+
     <h3> Genre: </h3>
+    <% if @book.genres != []%>
     <h4><%@book.genres.each_with_index do |genre, i|%>
     <p><%=i+1%>. <%=genre.name%></p>
     <a href="/genres/<%=genre.id%>">Genre Details</a>
+      <%end%>
     <%end%>
+
     <%if @book.genres == []%>
     <p>N/A</p>
     <%end%>

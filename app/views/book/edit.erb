@@ -7,12 +7,17 @@
   <body>
     <h1>Edit '<%=@book.title%>'</h1>
     <form method="post" action="/manga/edit/<%=@book.id%>">
-    <input id="hidden" type="hidden" name="_method" value="patch">
+
     <label>Title: </label><input type = "text" placeholder= "<%=@book.title%>" name="manga[title]">
     <br></br>
     <label>Volume: </label><input type = "text" placeholder= "<%=@book.volume%>" name="manga[volume]">
     <br></br>
-    <label>Author: </label><input type = "text" placeholder= "<%=@book.author.name%>" name="manga[author]">
+    <%if !!@book.author%>
+      <label>Author: </label><input type = "text" placeholder= "<%=@book.author.name%>" name="manga[author]">
+    <%else%>
+      <label>Author: </label><input type = "text" name="manga[author]">
+    <%end%>
+
     <br></br>
     <p> Or pick an author below: </p>
     <%array = Author.all - Array(@book.author)%>
@@ -23,16 +28,10 @@
     <label>Genre: </label><input type = "text" name="manga[genre]">
 
     <h3> Genre: </h3>
-    <%if @book.genres == []%>
-    <p> N/A </p>
-    <%end%>
-    <p><%@book.genres.all.each_with_index do |genre, i|%></p>
-    <p><%=i+1%>. <%=genre.name%></p>
-    <%end%>
+    <p> Click all genres you'd like to categorize this work under. </p>
 
     <p>Other Genres: </p>
-    <%array = Genre.all - @book.genres%>
-    <%array.each do |genre|%>
+    <%Genre.all.each do |genre|%>
       <input type="checkbox" name="manga[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
     <%end%>
     <br></br>

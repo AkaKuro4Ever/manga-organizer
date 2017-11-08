@@ -113,6 +113,7 @@ class BookController < ApplicationController
     @book.volume = params[:manga][:volume]
     end
     #If both are authors filled, redirects
+    binding.pry
     if author != "" && params[:manga][:author_id] != nil
       redirect '/manga/new'
     #If top is filled out, but author exists, it assigns existing author
@@ -121,8 +122,11 @@ class BookController < ApplicationController
     #If top is filled out and author doesn't exist, it assigns top
     elsif author != ""
       @book.author = Author.create(name: author)
-    #If top isn't filled out, it assigns bottom
     else
+      nil
+    #If top isn't filled out, it assigns bottom
+    end
+    if params[:manga][:author_id] != nil
       @book.author = Author.find_by(id: params[:manga][:author_id])
     end
     #First, we clear the genres array
@@ -131,14 +135,15 @@ class BookController < ApplicationController
     if genre != "" && Genre.check(genre)
       @book.genres << Genre.find_by(name: genre)
     #If top is filled out and genre doesn't exist, it assigns top
-    else genre != ""
+    elsif genre != ""
       @book.genres << Genre.create(name: genre)
     #No matter what, it assigns bottom
-    end
-    if params[:manga][:genre_ids] != nil
+    elsif params[:manga][:genre_ids] != nil
       params[:manga][:genre_ids].each do |id|
         @book.genres << Genre.find_by(id: id)
       end
+    else
+      @book.genres = []
     end
 
   @book.save
