@@ -11,8 +11,11 @@
     <%end%>
 
     <h3>Author: </h3> <h4><%=@book.author.name%></h4>
-    <h3> Genre: </h3> <h4><%@book.genres.each_with_index do |genre, i|%>
+    <a href="/authors/<%=@book.author.id%>">Author Details</a>
+    <h3> Genre: </h3>
+    <h4><%@book.genres.each_with_index do |genre, i|%>
     <p><%=i+1%>. <%=genre.name%></p>
+    <a href="/genres/<%=genre.id%>">Genre Details</a>
     <%end%>
     <%if @book.genres == []%>
     <p>N/A</p>
@@ -33,5 +36,7 @@
     <%else%>
       <%nil%>
     <%end%>
+    <br></br>
+    <a href="/manga">View All Books</a>
   </body>
 </html>
