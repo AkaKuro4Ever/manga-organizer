@@ -10,9 +10,13 @@
     <h2>Volume: <%= @book.volume%></h2>
     <%end%>
 
-    <h3>Author: </h3> <h4><%=@book.author.name%></h4>
+    <h3>Author: </h3>
+    <%if @book.author != nil%> <h4><%=@book.author.name%></h4>
     <a href="/authors/<%=@book.author.id%>">Author Details</a>
-
+    <%else%>
+    <p>N/A</p>
+    
+    <%end%>
     <h3> Genre: </h3>
     <% if @book.genres != []%>
     <h4><%@book.genres.each_with_index do |genre, i|%>
@@ -49,6 +53,8 @@
     <br></br>
     <a href="/manga">View All Books</a>
     <br></br>
+    <%if logged_in?%>
     <a href="/users/<%=current_user.id%>">Back To My Profile</a>
+    <%end%>
   </body>
 </html>

@@ -26,7 +26,7 @@
       <%Genre.all.each do |genre|%>
         <input type="checkbox" name="manga[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
       <%end%>
-
+      <br></br>
     <button type="submit" value="submit">Submit</button>
     </form>
   </body>

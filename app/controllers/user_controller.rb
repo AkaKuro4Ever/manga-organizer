@@ -9,9 +9,19 @@ use Rack::Flash
     erb :'user/signup'
   end
 
+  get '/users/error/1' do
+
+    erb :error_signup
+  end
+
+  get '/users/error/2' do
+
+    erb :error_login
+  end
+
   post '/signup' do
     if params[:user][:username] == "" || params[:user][:password] == "" || params[:user][:email] == ""
-      redirect "/signup"
+      redirect "/users/error/1"
     else
       @user = User.new(username:  params[:user][:username], email: params[:user][:email], password: params[:user][:password])
       @user.save #user.save only authenticates a password is not an empty string, not the username or email
@@ -43,7 +53,7 @@ use Rack::Flash
         session[:id] = @user.id
         redirect "/users/#{@user.id}"
     else
-      redirect "/login"
+      redirect '/users/error/2'
     end
   end
 

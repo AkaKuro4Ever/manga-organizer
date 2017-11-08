@@ -5,6 +5,10 @@
 </head>
   <body>
     <h1><%=@user.username%>'s Manga</h1>
-    <h3><%=@user.username%> has <%=@user.books.count%> books in their collection.</h3>
+    <%if @user.books.count < 2%>
+      <h3><%=@user.username%> has <%=@user.books.count%> book in their collection.</h3>
+    <%else%>
+      <h3><%=@user.username%> has <%=@user.books.count%> books in their collection.</h3>
+    <%end%>
   </body>
 </html>

@@ -20,7 +20,9 @@
     <a href="/authors/<%=author.id%>">Author Details</a>
     <%end%>
     <br></br>
+    <%if logged_in?%>
     <a href="/users/<%=current_user.id%>">Back To My Profile</a>
+    <%end%>
     <br></br>
     <a href="/manga">View All Manga</a>
     <br></br>

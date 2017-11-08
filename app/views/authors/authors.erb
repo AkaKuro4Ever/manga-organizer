@@ -11,6 +11,8 @@
     <a href="/authors/<%=author.id%>"> Details</a>
     <%end%>
   <br></br>
+  <%if logged_in?%>
   <a href="/users/<%=current_user.id%>">Back To My Profile</a>
+  <%end%>
   </body>
 </html>
