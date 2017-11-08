@@ -53,13 +53,12 @@ class BookController < ApplicationController
     if logged_in?
       current_user.books << @book
     end
-    @user = current_user
+    current_user
     erb :'/book/book'
   end
 
   #SEE INDIV MANGA BOOK PAGE ----------
   get '/manga/:id' do
-    @user = current_user
     @book = Book.find_by(id: params[:id])
     erb :'/book/book'
   end
@@ -95,8 +94,55 @@ class BookController < ApplicationController
   end
 
   #EDIT INDIV MANGA BOOK DETAILS
-  get '/manga/edit' do
+  get '/manga/edit/:id' do
+    @book = Book.find_by(id: params[:id])
+    erb :'book/edit'
+  end
 
-    erb :'book/edit/'
+  patch '/manga/edit/:id' do
+    @book = Book.find_by(id: params[:id])
+
+    author = params[:manga][:author].strip.split.map(&:capitalize).join(' ')
+    genre = params[:manga][:genre].strip.split.map(&:capitalize).join(' ')
+
+    if params[:manga][:title] != ""
+      @book = Book.new(title: params[:manga][:title].split.map(&:capitalize).join(' '), volume: params[:manga][:volume])
+    end
+    #If both are authors filled, redirects
+    #If title is not filled out, redirects
+    #If both genres filled out, redirects
+    if author != "" && params[:manga][:author_id] != nil || genre != "" && params[:manga][:genre_ids] != nil || params[:manga][:title] == ""
+      redirect '/manga/new'
+    #If top is filled out, but author exists, it assigns existing author
+    elsif author != "" && Author.check(author)
+      @book.author = Author.find_by(name: author)
+    #If top is filled out and author doesn't exist, it assigns top
+    elsif author != ""
+      @book.author = Author.create(name: author)
+    #If top isn't filled out, it assigns bottom
+    else
+      @book.author = Author.find_by(id: params[:manga][:author_id])
+    end
+    #If top is filled out, but genre exists, it assigns existing genre
+    if genre != "" && Genre.check(genre)
+      @book.genres << Genre.find_by(name: genre)
+    #If top is filled out and genre doesn't exist, it assigns top
+    elsif genre != ""
+      @book.genres << Genre.create(name: genre)
+    #If top isn't filled out, it assigns bottom
+    else
+      if params[:manga][:genre_ids] != nil
+        params[:manga][:genre_ids].each do |id|
+          @book.genres << Genre.find_by(id: id)
+        end
+      end
+    end
+
+  @book.save
+    if logged_in?
+      current_user.books << @book
+    end
+    current_user
+    erb :'/book/book'
   end
 end

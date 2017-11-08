@@ -5,23 +5,27 @@
 
 </head>
   <body>
+    <h1>Edit '<%=@book.title%>'</h1>
     <form method="post" action="/manga/edit/<%=@book.id%>">
-    <label>Title: </label><input type = "text" placeholder= "%=@book.title%>" name="manga[title]">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label>Title: </label><input type = "text" placeholder= "<%=@book.title%>" name="manga[title]">
     <br></br>
-    <label>Volume: </label><input type = "text" placeholder= "%=@book.volume%>" name="manga[volume]">
+    <label>Volume: </label><input type = "text" placeholder= "<%=@book.volume%>" name="manga[volume]">
     <br></br>
-    <label>Author: </label><input type = "text" placeholder= "%=@book.author%>" name="manga[author]">
+    <label>Author: </label><input type = "text" placeholder= "<%=@book.author.name%>" name="manga[author]">
     <br></br>
     <p> Or pick an author below: </p>
-    <br></br>
-    <%Author.all.each do |author|%>
+    <%array = Author.all - Array(@book.author)%>
+    <%array.each do |author|%>
       <input type="radio" name="manga[author_id]" value="<%=author.id%>"><%=author.name%></input>
     <%end%>
     <br></br>
     <label>Genre: </label><input type = "text" name="manga[genre]">
 
     <h3> Genre: </h3>
-
+    <%if @book.genres == []%>
+    <p> N/A </p>
+    <%end%>
     <p><%@book.genres.all.each_with_index do |genre, i|%></p>
     <p><%=i+1%>. <%=genre.name%></p>
     <%end%>
@@ -31,15 +35,7 @@
     <%array.each do |genre|%>
       <input type="checkbox" name="manga[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
     <%end%>
-    <!-- FIND WAY TO PRE-CHECK BOXES -->
-    </form>
-    <%if logged_in? && user.books.include?(@book)%>
-      <p>This book is in your collection.</p>
-    <%elsif logged_in?%>
-      <p>This book is not in your collection.</p>
-      <a href="/manga/add/<%=@book.id%>">Add To My Collection</a>
-    <%else%>
-      <%nil%>
-    <%end%>
+    <br></br>
+    <button type="submit" value="submit">Submit</button>
   </body>
 </html>

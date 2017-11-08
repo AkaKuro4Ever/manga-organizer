@@ -14,7 +14,7 @@
     <a href="/manga/<%=book.id%>">Book Details</a>
     <%if book.author != nil%>
     <h3>Author: </h3><p><%= book.author.name%></p>
-    <a href="/authors/<%=book.author.id%>">More Information</a>
+    <a href="/authors/<%=book.author.id%>">Author Details</a>
     <%end%>
 
     <%if book.genres != []%>
@@ -24,5 +24,7 @@
       <%end%>
     <%end%>
   <%end%>
+  <br></br>
+  <a href="/users/<%=current_user.id%>">Back To My Profile</a>
   </body>
 </html>
