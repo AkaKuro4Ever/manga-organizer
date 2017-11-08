@@ -37,10 +37,18 @@
       <a href="/manga/add/<%=@book.id%>">Add To My Collection</a>
       <br></br>
       <a href="/manga/edit/<%=@book.id%>">Edit Book Information</a>
+      <br></br>
+      <form action="/manga/<%= @book.id %>/delete" method="post">
+		  <input id="hidden" type="hidden" name="_method" value="delete">
+		  <button type="submit" value="delete">Delete Book</button>
+		</form>
+
     <%else%>
       <%nil%>
     <%end%>
     <br></br>
     <a href="/manga">View All Books</a>
+    <br></br>
+    <a href="/users/<%=current_user.id%>">Back To My Profile</a>
   </body>
 </html>

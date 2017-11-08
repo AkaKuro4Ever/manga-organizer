@@ -132,4 +132,10 @@ class BookController < ApplicationController
   @book.save
     erb :'/book/book'
   end
+
+  delete '/manga/:id/delete' do
+    @book = Book.find_by(id: params[:id])
+    @book.delete
+    redirect '/manga'
+  end
 end
