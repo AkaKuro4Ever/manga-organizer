@@ -1,0 +1,16 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+  <title>All Authors In Collection</title>
+
+</head>
+  <body>
+    <h1>All Manga In Collection</h1>
+    <%Author.all.each_with_index do |author, i|%>
+    <h3><%=i+1%>. Author: </h3><p><%= author.name%></p>
+    <a href="/authors/<%=author.id%>"> Details</a>
+    <%end%>
+  <br></br>
+  <a href="/users/<%=current_user.id%>">Back To My Profile</a>
+  </body>
+</html>

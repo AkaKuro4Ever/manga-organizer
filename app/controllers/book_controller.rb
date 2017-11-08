@@ -63,14 +63,6 @@ class BookController < ApplicationController
     erb :'/book/book'
   end
 
-  #SEE AUTHOR PAGE ------------
-  get '/authors/:id' do
-
-    @author = Author.find_by(id: params[:id])
-
-    erb :author
-  end
-
   #SEE GENRE PAGE ------------
   get '/genres/:id' do
 
@@ -113,7 +105,6 @@ class BookController < ApplicationController
     @book.volume = params[:manga][:volume]
     end
     #If both are authors filled, redirects
-    binding.pry
     if author != "" && params[:manga][:author_id] != nil
       redirect '/manga/new'
     #If top is filled out, but author exists, it assigns existing author
