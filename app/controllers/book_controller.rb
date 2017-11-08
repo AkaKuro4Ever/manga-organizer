@@ -63,14 +63,6 @@ class BookController < ApplicationController
     erb :'/book/book'
   end
 
-  #SEE GENRE PAGE ------------
-  get '/genres/:id' do
-
-    @genre = Genre.find_by(id: params[:id])
-
-    erb :genre
-  end
-
   #ADD INDIV MANGA TO USER'S PROFILE PAGE---
   get '/manga/add/:id' do
     @book = Book.find_by(id: params[:id])

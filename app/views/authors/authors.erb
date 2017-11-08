@@ -5,7 +5,7 @@
 
 </head>
   <body>
-    <h1>All Manga In Collection</h1>
+    <h1>All Authors In Collection</h1>
     <%Author.all.each_with_index do |author, i|%>
     <h3><%=i+1%>. Author: </h3><p><%= author.name%></p>
     <a href="/authors/<%=author.id%>"> Details</a>

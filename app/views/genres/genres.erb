@@ -1,0 +1,16 @@
+<!DOCTYPEhtml>
+<html>
+<head>
+  <title>All Genres In Collection</title>
+
+</head>
+  <body>
+    <h1>All Genres In Collection</h1>
+    <%Genre.all.each_with_index do |genre, i|%>
+    <h3><%=i+1%>. Genre: </h3><p><%= genre.name%></p>
+    <a href="/genres/<%=genre.id%>"> Details</a>
+    <%end%>
+  <br></br>
+  <a href="/users/<%=current_user.id%>">Back To My Profile</a>
+  </body>
+</html>
