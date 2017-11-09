@@ -124,7 +124,9 @@ class BookController < ApplicationController
     elsif genre != ""
       @book.genres << Genre.create(name: genre)
     #No matter what, it assigns bottom
-    elsif params[:manga][:genre_ids] != nil
+    else
+    end
+    if params[:manga][:genre_ids] != nil
       params[:manga][:genre_ids].each do |id|
         @book.genres << Genre.find_by(id: id)
       end

@@ -15,11 +15,13 @@
       <a href="/manga/<%=book.id%>">Book Details</a>
     <%end%>
     <br></br>
-    <a href="/users/<%=@user.id%>/edit">Edit</a>
-    <form method="get" action="/manga/new">
-      <button type="submit">Create New Manga</button>
+    <a href="/manga">View All Books</a>
+    <br></br>
+    <a href="/users/<%=@user.id%>/edit">Edit Collection</a>
+    <br></br>
+    <a href="/manga/new">Create New Manga</a>
     </form>
-
+    <br></br>
     <a href="/logout">Logout</a>
   </body>
 </html>
