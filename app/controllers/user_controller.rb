@@ -5,7 +5,7 @@ use Rack::Flash
 
 #SIGN UP FORM ----------------
   get '/signup' do
-
+    @title = 'Sign Up'
     erb :'user/signup'
   end
 
@@ -21,12 +21,19 @@ use Rack::Flash
 
   post '/signup' do
     if params[:user][:username] == "" || params[:user][:password] == "" || params[:user][:email] == ""
-      redirect "/users/error/1"
+      @message = "All fields must be filled in to create a user account"
+      erb :'user/signup'
     else
       @user = User.new(username:  params[:user][:username], email: params[:user][:email], password: params[:user][:password])
-      @user.save #user.save only authenticates a password is not an empty string, not the username or email
-      session[:id] = @user.id
-      redirect to "/users/#{@user.id}"
+      #user.save only authenticates a password is not an empty string, not the username or email
+        if @user.save
+          #anytime there is a chance of returning nil or true/false, handle that case!
+          session[:user_id] = @user.id
+          redirect to "/users/#{@user.id}"
+        else
+          @message = "Sorry! It seems we have an error. Please try again."
+          erb :'user/signup'
+        end
     end
   end
 
@@ -50,7 +57,7 @@ use Rack::Flash
   post '/login' do
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
-        session[:id] = @user.id
+        session[:user_id] = @user.id
         redirect "/users/#{@user.id}"
     else
       redirect '/users/error/2'

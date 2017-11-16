@@ -15,7 +15,7 @@
     <a href="/authors/<%=@book.author.id%>">Author Details</a>
     <%else%>
     <p>N/A</p>
-    
+
     <%end%>
     <h3> Genre: </h3>
     <% if @book.genres != []%>
@@ -30,13 +30,13 @@
     <%end%>
   </h4>
 
-    <%if logged_in? && current_user.books.include?(@book)%>
+    <% if logged_in? && current_user.books.include?(@book) %>
       <p>This book is in your collection.</p>
       <a href="/manga/remove/<%=@book.id%>">Remove From My Collection</a>
       <br></br>
       <a href="/manga/edit/<%=@book.id%>">Edit Book Information</a>
 
-    <%elsif logged_in?%>
+    <% elsif logged_in? %>
       <p>This book is not in your collection.</p>
       <a href="/manga/add/<%=@book.id%>">Add To My Collection</a>
       <br></br>
@@ -47,9 +47,9 @@
 		  <button type="submit" value="delete">Delete Book</button>
 		</form>
 
-    <%else%>
-      <%nil%>
-    <%end%>
+    <% else %>
+      <% nil %>
+    <% end %>
     <br></br>
     <a href="/manga">View All Books</a>
     <br></br>

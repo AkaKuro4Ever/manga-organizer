@@ -63,30 +63,34 @@ class BookController < ApplicationController
   #SEE INDIV MANGA BOOK PAGE ----------
   get '/manga/:id' do
     @book = Book.find_by(id: params[:id])
-    erb :'/book/book'
+    if @book
+      erb :'/book/book'
+    else
+      redirect to '/manga'
+    end
   end
 
   #ADD INDIV MANGA TO USER'S PROFILE PAGE---
-  get '/manga/add/:id' do
+  post '/manga/:id/add' do
     @book = Book.find_by(id: params[:id])
     current_user.books << @book
     redirect to "users/#{current_user.id}"
   end
 
   #REMOVE INDIV MANGA TO USER'S PROFILE PAGE---
-  get '/manga/remove/:id' do
+  delete '/manga/:id/remove' do
     @book = Book.find_by(id: params[:id])
     current_user.books.delete(@book)
     redirect to "users/#{current_user.id}"
   end
 
   #EDIT INDIV MANGA BOOK DETAILS
-  get '/manga/edit/:id' do
+  get '/manga/:id/edit' do
     @book = Book.find_by(id: params[:id])
     erb :'book/edit'
   end
 
-  post '/manga/edit/:id' do
+  put '/manga/:id' do
     @book = Book.find_by(id: params[:id])
 
     author = params[:manga][:author].strip.split.map(&:capitalize).join(' ')
@@ -138,7 +142,7 @@ class BookController < ApplicationController
     erb :'/book/book'
   end
 
-  delete '/manga/:id/delete' do
+  delete '/manga/:id' do
     @book = Book.find_by(id: params[:id])
     @book.delete
     redirect '/manga'
