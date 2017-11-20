@@ -71,23 +71,38 @@ class BookController < ApplicationController
   end
 
   #ADD INDIV MANGA TO USER'S PROFILE PAGE---
-  post '/manga/:id/add' do
+  get '/manga/:id/add' do
     @book = Book.find_by(id: params[:id])
-    current_user.books << @book
-    redirect to "users/#{current_user.id}"
+    if logged_in?
+      current_user.books << @book
+      redirect to "users/#{current_user.id}"
+    else
+      @message = "Please log in to be able to add a manga from your collection."
+      erb :'book/book'
+    end
   end
 
   #REMOVE INDIV MANGA TO USER'S PROFILE PAGE---
   delete '/manga/:id/remove' do
     @book = Book.find_by(id: params[:id])
-    current_user.books.delete(@book)
-    redirect to "users/#{current_user.id}"
+    if logged_in?
+      current_user.books.delete(@book)
+      redirect to "users/#{current_user.id}"
+    else
+      @message = "Please log in to be able to remove a manga from your collection."
+      erb :'book/book'
+    end
   end
 
   #EDIT INDIV MANGA BOOK DETAILS
   get '/manga/:id/edit' do
     @book = Book.find_by(id: params[:id])
-    erb :'book/edit'
+    if logged_in?
+      erb :'book/edit'
+    else
+      @message = "Please log in to be able to edit this manga."
+      erb :'book/book'
+    end
   end
 
   put '/manga/:id' do
@@ -144,6 +159,12 @@ class BookController < ApplicationController
 
   delete '/manga/:id' do
     @book = Book.find_by(id: params[:id])
+    if logged_in?
+      @message = "Please log in to be able to delete this manga."
+      erb :'/book/book'
+    else
+      redirect to '/manga'
+    end
     @book.delete
     redirect '/manga'
   end
