@@ -6,13 +6,14 @@
 </head>
   <body>
     <h1>Edit '<%=@book.title%>'</h1>
-    <form method="post" action="/manga/edit/<%=@book.id%>">
-
+    <%= @message %>
+    <form method="post" action="/manga/<%=@book.id%>">
+      <input id="hidden" type="hidden" name="_method" value="patch">
     <label>Title: </label><input type = "text" placeholder= "<%=@book.title%>" name="manga[title]">
     <br></br>
     <label>Volume: </label><input type = "text" placeholder= "<%=@book.volume%>" name="manga[volume]">
     <br></br>
-    <%if !!@book.author%>
+    <%if @book.author%>
       <label>Author: </label><input type = "text" placeholder= "<%=@book.author.name%>" name="manga[author]">
     <%else%>
       <label>Author: </label><input type = "text" name="manga[author]">

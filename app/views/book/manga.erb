@@ -6,6 +6,7 @@
 </head>
   <body>
     <h1>All Manga In Collection</h1>
+    <%=@message%>
     <%Book.all.each_with_index do |book, i|%>
     <h3><%=i+1%>. <%=book.title%></h3>
     <%if book.volume != nil%>

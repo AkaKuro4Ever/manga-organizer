@@ -7,6 +7,7 @@
     <h1>Hello, <%=@user.username%></h1>
 
     <h2> Your Manga </h2>
+    <%=@message%>
     <%@user.books.all.each_with_index do |book, i|%>
       <h1><%=i+1%>. <%=book.title%></h1>
       <%if book.volume != nil%>

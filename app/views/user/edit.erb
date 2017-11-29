@@ -7,6 +7,7 @@
   <body>
 
     <h2> Your Manga </h2>
+    <%=@message%>
     <h3>Check all books you'd like to delete from your collection.</h3>
     <form method="POST" action="/users/<%=@user.id%>/edit">
     <input id="hidden" type="hidden" name="_method" value="patch">

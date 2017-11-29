@@ -7,7 +7,22 @@
     <h1>Homepage</h1>
     <h3>Welcome to Manga Organizer!</h3>
 
-    <p> It seems that you've had an error while filling out the form! Make sure you only listed one author and have filled in a title.</p>
+    <p> It seems there's been an error deleting this manga. Please try again.</p>
+
+    <% if @book.errors.any? %>
+		  <div id="error_explanation">
+		    <h2>
+		      <%= pluralize(@book.errors.count, "error") %>
+		      prohibited this book from being deleted:
+		    </h2>
+		 
+		    <ul>
+		    <% @book.errors.full_messages.each do |msg| %>
+		      <li><%= msg %></li>
+		    <% end %>
+		    </ul>
+		  </div>
+		<% end %>
 
     <a href="/manga/new">Click here to create a new manga!</a>
   </body>
