@@ -4,4 +4,4 @@ Use this program to keep track of your manga and novels in your library, includi
 
 Usage
 
-To use this app, just clone, run rake db:migrate and then run shotgun. Everything should be set up.
+To use this app, just clone, run ```rake db:migrate``` and then run ```shotgun```. Everything should be set up.
